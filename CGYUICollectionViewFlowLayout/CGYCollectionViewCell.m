@@ -12,19 +12,21 @@
 
 @interface CGYCollectionViewCell ()
 {
-    UIImageView     *_imageView;
+    UILabel             *_labNumber;
 }
 
 @end
 
 @implementation CGYCollectionViewCell
 
-- (id)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     
     if (self)
     {
+        self.backgroundColor = [UIColor blueColor];
+        
         [self createUI];
     }
     
@@ -33,17 +35,22 @@
 
 - (void)createUI
 {
-    if (nil == _imageView)
+    if (_labNumber == nil)
     {
-        _imageView = [[UIImageView alloc] init];
-        _imageView.backgroundColor = [UIColor redColor];
+        _labNumber = [[UILabel alloc] init];
+        _labNumber.backgroundColor = [UIColor redColor];
     }
+
+    [self addSubview:_labNumber];
     
-    [self addSubview:_imageView];
-    
-    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+    [_labNumber makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
     }];
+}
+
+- (void)setLabel:(NSString *)string
+{
+    _labNumber.text = string;
 }
 
 @end

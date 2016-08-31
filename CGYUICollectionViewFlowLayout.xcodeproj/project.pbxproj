@@ -533,7 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CGYUICollectionViewFlowLayout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appress.CGYUICollectionViewFlowLayout;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appress;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -544,7 +544,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CGYUICollectionViewFlowLayout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appress.CGYUICollectionViewFlowLayout;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appress;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -614,6 +614,7 @@
 				FD66D1471D75C92A00E03CFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD66D1481D75C92A00E03CFF /* Build configuration list for PBXNativeTarget "CGYUICollectionViewFlowLayoutTests" */ = {
 			isa = XCConfigurationList;
@@ -622,6 +623,7 @@
 				FD66D14A1D75C92A00E03CFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD66D14B1D75C92A00E03CFF /* Build configuration list for PBXNativeTarget "CGYUICollectionViewFlowLayoutUITests" */ = {
 			isa = XCConfigurationList;
@@ -630,6 +632,7 @@
 				FD66D14D1D75C92A00E03CFF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

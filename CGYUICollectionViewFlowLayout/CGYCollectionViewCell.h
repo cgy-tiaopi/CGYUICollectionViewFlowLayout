@@ -10,4 +10,6 @@
 
 @interface CGYCollectionViewCell : UICollectionViewCell
 
+- (void)setLabel:(NSString *)string;
+
 @end

@@ -29,8 +29,11 @@ typedef NS_ENUM(NSInteger, CGYFlowLayoutType)
 
 @optional
 
-//在竖直模式下需要实现此方法，制定CollectionView中显示的列数
+//竖直不规则模式下需要实现此方法，制定CollectionView中显示的列数
 - (NSInteger)CGYFlowLayoutVerticalNumber;
+
+//水平不规则模式下需要实现此方法，元素的自定义高度
+- (CGFloat)CGYFlowLayoutHorizontalCommonHeight;
 
 @end
 
