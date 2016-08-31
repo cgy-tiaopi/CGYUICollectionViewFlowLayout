@@ -7,8 +7,16 @@
 //
 
 #import "ViewController.h"
+#import "CGYFlowLayout.h"
 
-@interface ViewController ()
+@interface ViewController ()<CGYFlowLayoutdataSource>
+{
+    UICollectionView *_collectionView;
+    
+    CGYFlowLayout    *flowLayout;
+    
+    NSMutableArray   *_arraySize;
+}
 
 @end
 
@@ -16,12 +24,48 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    [self createUI];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)createUI
+{
+    if (flowLayout == nil)
+    {
+        flowLayout = [[CGYFlowLayout alloc] init];
+        flowLayout.dataSource = self;
+    }
+    
+    if (_collectionView == nil)
+    {
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+    }
+}
+
+#pragma mark - CGYFlowLayoutdataSource
+- (NSArray *)CGYFlowLayoutElementsSize
+{
+    return _arraySize;
+}
+
+- (CGYFlowLayoutType)CGYCollectionViewFlowLayoutType
+{
+    return CGYFlowLayoutTypeVertical;
+}
+
+- (NSInteger)CGYFlowLayoutVerticalNumber
+{
+    return 3;
+}
+
+- (CGFloat)CGYFlowLayoutWidth
+{
+    return [[UIScreen mainScreen] bounds].size.width;
 }
 
 @end
