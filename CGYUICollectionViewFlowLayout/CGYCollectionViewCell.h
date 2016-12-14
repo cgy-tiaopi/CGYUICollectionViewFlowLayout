@@ -10,6 +10,6 @@
 
 @interface CGYCollectionViewCell : UICollectionViewCell
 
-- (void)setLabel:(NSString *)string;
+- (void)setImage:(UIImage *)image;
 
 @end

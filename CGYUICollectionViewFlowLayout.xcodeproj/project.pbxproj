@@ -312,6 +312,8 @@
 				TargetAttributes = {
 					FD66D1171D75C92A00E03CFF = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = K7ZF6CSG64;
+						ProvisioningStyle = Automatic;
 					};
 					FD66D1301D75C92A00E03CFF = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -531,9 +533,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K7ZF6CSG64;
 				INFOPLIST_FILE = CGYUICollectionViewFlowLayout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appress;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appress.cgy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -542,9 +546,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K7ZF6CSG64;
 				INFOPLIST_FILE = CGYUICollectionViewFlowLayout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appress;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appress.cgy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

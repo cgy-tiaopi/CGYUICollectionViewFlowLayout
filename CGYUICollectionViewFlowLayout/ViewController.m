@@ -19,6 +19,7 @@
     CGYFlowLayout    *flowLayout;
     
     NSMutableArray   *_arrayList;
+    NSMutableArray   *_arraySize;
 }
 
 @end
@@ -36,15 +37,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (void)createUI
 {
     if (_arrayList == nil)
     {
         _arrayList = [[NSMutableArray alloc] init];
-        for (NSInteger i =0 ;i <10 ;i++)
+        _arraySize = [[NSMutableArray alloc] init];
+        for (NSInteger i =0 ;i <15 ;i++)
         {
-            [_arrayList addObject:[NSString stringWithFormat:@"%d", 100+i*5]];
+            [_arraySize addObject:[NSString stringWithFormat:@"%lu", (unsigned long)100+i*5]];
+            NSString *imageName = [NSString stringWithFormat:@"Image_%ld",(long)i+1];
+            UIImage *image = [UIImage imageNamed:imageName];
+            [_arrayList addObject:image];
         }
+        [_arraySize addObject:@"1000"];
     }
     
     if (flowLayout == nil)
@@ -52,8 +59,8 @@
         flowLayout = [[CGYFlowLayout alloc] init];
         flowLayout.dataSource = self;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        flowLayout.minimumLineSpacing = 5;
-        flowLayout.minimumInteritemSpacing = 5;
+        flowLayout.minimumLineSpacing = 20;
+        flowLayout.minimumInteritemSpacing = 20;
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     }
     
@@ -70,15 +77,14 @@
     [self.view addSubview:_collectionView];
     
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.view);
-        make.height.equalTo(@100);
+        make.edges.equalTo(self.view);
     }];
 }
 
 #pragma mark - CGYFlowLayoutdataSource
 - (NSArray *)CGYFlowLayoutElementsSize
 {
-    return _arrayList;
+    return _arraySize;
 }
 
 - (CGYFlowLayoutType)CGYCollectionViewFlowLayoutType
@@ -98,7 +104,7 @@
 
 - (CGFloat)CGYFlowLayoutHorizontalCommonHeight
 {
-    return 30;
+    return 150;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -111,7 +117,8 @@
 {
     CGYCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CGYCollectionViewCell" forIndexPath:indexPath];
     
-    [cell setLabel:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+//    [cell setLabel:[NSString stringWithFormat:@"%ld",(long)indexPath.row]];
+    [cell setImage:[_arrayList objectAtIndex:indexPath.row]];
     
     return cell;
 }

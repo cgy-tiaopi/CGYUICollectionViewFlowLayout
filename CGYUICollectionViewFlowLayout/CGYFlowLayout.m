@@ -10,18 +10,18 @@
 
 @interface CGYFlowLayout ()
 {
-    NSArray             *elementsSize;          //布局元素尺寸存储数组
-    NSInteger           verticalNumber;         //竖直不规则布局列数
-    NSMutableArray      *_arrayPosition;        //元素布局位置存储数组
-    NSMutableDictionary *_dicVerticalHeight;    //对应列高度存储字典
+    NSArray             *elementsSize;                 //布局元素尺寸存储数组
+    NSInteger           verticalNumber;                //竖直不规则布局列数
+    NSMutableArray      *_arrayPosition;               //元素布局位置存储数组
+    NSMutableDictionary *_dicVerticalHeight;           //对应列高度存储字典
     
-    CGFloat             flowLayoutWidth;        //flowLayout的宽度
+    CGFloat             flowLayoutWidth;               //UICollectionView的宽度
     
     CGFloat             horizontalElementsHeight;      //水平模式下每行元素的高度
     
-    CGFloat             HorizontalHeight;
+    CGFloat             HorizontalHeight;              //UICollectionView的总高度
     
-    CGYFlowLayoutType   flowLayoutType;
+    CGYFlowLayoutType   flowLayoutType;                //布局模式
 }
 
 @end
@@ -34,7 +34,6 @@
     
     if (self)
     {
-        
         if (nil == _arrayPosition)
         {
             _arrayPosition = [[NSMutableArray alloc] init];
@@ -55,6 +54,8 @@
     self.dataSource = dataSource;
 }
 
+
+//系统布局方法重写
 #pragma mark - override UICollectionFlowLayout
 - (void)prepareLayout
 {
@@ -74,6 +75,24 @@
         }
         default:
             break;
+    }
+}
+
+//返回计算好的布局数组信息
+- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
+{
+    return _arrayPosition;
+}
+
+- (CGSize)collectionViewContentSize
+{
+    if (flowLayoutType == CGYFlowLayoutTypeVertical)
+    {
+        return CGSizeMake(flowLayoutWidth, [self maxHeightPosition]);
+    }
+    else
+    {
+        return CGSizeMake(flowLayoutWidth, HorizontalHeight);
     }
 }
 
@@ -128,7 +147,6 @@
 }
 
 #pragma mark - CGYFlowLayout 布局方法实现
-
 //水平不规则布局方式实现
 - (void)flowLayoutHorizontal
 {
@@ -141,32 +159,27 @@
     for (NSInteger i = 0 ; i < [elementsSize count] ; i++)
     {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        
         UICollectionViewLayoutAttributes *attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
         
         elementsWidth = [[elementsSize objectAtIndex:i] floatValue];
         
+        NSAssert(elementsWidth>flowLayoutWidth, @"这个元素比CollectionView的宽度还宽");
+        
         if ((positionX + self.sectionInset.right + elementsWidth) > flowLayoutWidth)
         {
             positionX = self.sectionInset.left;
-            
             HorizontalHeight = HorizontalHeight + horizontalElementsHeight + self.minimumInteritemSpacing;
-            
             attr.frame = CGRectMake(positionX, HorizontalHeight, elementsWidth, horizontalElementsHeight);
-            
             positionX = positionX + elementsWidth + self.minimumLineSpacing;
         }
         else
         {
             attr.frame = CGRectMake(positionX, HorizontalHeight, elementsWidth, horizontalElementsHeight);
-            
             positionX = positionX + elementsWidth + self.minimumLineSpacing;
         }
         
         [_arrayPosition addObject:attr];
-        
     }
-    
     HorizontalHeight = HorizontalHeight + horizontalElementsHeight;
 }
 
@@ -247,25 +260,6 @@
         }
     }
     return MaxHeight;
-}
-
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
-{
-    NSLog(@"Position Count = %lu",(unsigned long)[_arrayPosition count]);
-    
-    return _arrayPosition;
-}
-
-- (CGSize)collectionViewContentSize
-{
-    if (flowLayoutType == CGYFlowLayoutTypeVertical)
-    {
-        return CGSizeMake(flowLayoutWidth, [self maxHeightPosition]);
-    }
-    else
-    {
-        return CGSizeMake(flowLayoutWidth, HorizontalHeight);
-    }
 }
 
 
